@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 const Ong = require('../models/Ongs');
 
 module.exports ={
@@ -24,6 +26,8 @@ module.exports ={
             longitude,
         
         } = request.body;
+        
+        const password = await bcrypt.hash(request.body.password, 10)
      
         const ongs = await Ong.findOne({ cnpj });
 
@@ -42,7 +46,8 @@ module.exports ={
 
             name, 
             cnpj, 
-            address, 
+            address,
+            password, 
             cep, 
             city, 
             uf,

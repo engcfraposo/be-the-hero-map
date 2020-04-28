@@ -1,16 +1,31 @@
+const bcrypt = require('bcrypt')
 const Ong = require('../models/Ongs');
 
+
 module.exports ={
+    
+
     async create(request, response){
 
-        const { cnpj } = request.body;
+        const { email, password } = request.body;
         
-        const cnpjLogin = cnpj.toString();
 
-        const Ongs = await Ong.find({cnpjLogin})
+        const ongEmail  =  await Ong.findOne({email})
 
+        if (!ongEmail){
 
-        return response.json(Ongs)
+            return response.status(400).json({ error: 'No ONG found with this ID'})
+
+        }
         
-    },
+        const ongPassword = await bcrypt.compare(password, ongEmail.password)
+        
+        if(ongPassword == false){
+
+            return response.status(400).json({ error: 'Wrong password'})
+
+        }
+        
+        return response.json(ongEmail._id);
+    }
 }

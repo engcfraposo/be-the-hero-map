@@ -9,10 +9,11 @@ const Ongschema = new mongoose.Schema({
         required: true,
     },
     cnpj: {
-        type: String,
+        type: Number,
         required: true,
     },
     address: String,
+    password: String,
     cep: {
         type: Number,
         required: true,
