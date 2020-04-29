@@ -8,7 +8,6 @@ module.exports ={
     async create(request, response){
 
         const { email, password } = request.body;
-        
 
         const ongEmail  =  await Ong.findOne({email})
 
@@ -26,6 +25,6 @@ module.exports ={
 
         }
         
-        return response.json(ongEmail._id);
+        return response.json(ongEmail);
     }
 }

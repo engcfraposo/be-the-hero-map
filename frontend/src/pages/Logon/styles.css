@@ -25,5 +25,15 @@
     margin: 16px 0;
 }
 
+.list-container{
+    flex-direction: row;
+    
+
+}
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    
+}
 
 

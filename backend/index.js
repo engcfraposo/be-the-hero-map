@@ -12,6 +12,7 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@omnistack9-ub5tj.gcp.mongodb
 })
 
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 
 app.use(cors());

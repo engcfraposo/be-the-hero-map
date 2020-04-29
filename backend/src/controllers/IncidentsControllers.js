@@ -1,4 +1,5 @@
 const Incidents = require('../models/Incidents');
+const Ongs = require('../models/Ongs');
 
 module.exports ={
     
@@ -10,6 +11,19 @@ module.exports ={
     },
 
     async store(request, response){
+        
+        const ong = request.headers.authorization;
+        const ong_id = ong.toString();
+        
+        const {
+            name, 
+            city, 
+            uf, 
+            whatsapp, 
+            email
+        } = await Ongs.findOne({_id: ong_id})
+        
+        
         const {
 
             title,
@@ -17,10 +31,6 @@ module.exports ={
             value,
         
         } = request.body;
-
-        const ong = request.headers.authorization;
-        const ong_id = ong.toString();
-
         
 
         const titleincidents = await Incidents.findOne({ title });
@@ -30,6 +40,8 @@ module.exports ={
         if (titleincidents && descriptionincidents && valuieincidents ){
             return response.status(400).json({ error: 'Exists a equal incident.'})
         }
+
+        
        
         incident = await Incidents.create ({
 
@@ -37,10 +49,14 @@ module.exports ={
             description,
             value,
             ong_id,
+            name,
+            city,
+            uf,
+            whatsapp,
+            email
         
         })
         
-
     return response.json(incident);
     
     },
