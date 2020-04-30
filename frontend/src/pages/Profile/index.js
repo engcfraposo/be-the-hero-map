@@ -62,7 +62,7 @@ function Profile() {
                     <p>{incident.title}</p>
                     <strong>DESCRIÇÃO:</strong>
                     <p>{incident.description}</p>
-                    <strong>Valor:</strong>
+                    <strong>VALOR:</strong>
                     <p>{Intl.NumberFormat('pt-BR',  {style: 'currency', currency:'BRL'}).format(incident.value)}</p>
                     <button><FiTrash2 onClick={() => handleDeleteIncident(incident._id)} size={20} color="#a8a8b3"/></button>
                 </li>

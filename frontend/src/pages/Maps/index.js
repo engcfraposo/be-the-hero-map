@@ -11,9 +11,7 @@ import 'leaflet/dist/leaflet.css'
 import './styles.css';
 
 
-
-
- function Maps(){
+function Maps(){
   
   const history = useHistory()
 
@@ -53,7 +51,7 @@ import './styles.css';
 
       setOngs(response.data);
 
-      console.log(response.data)
+      
     }
 
     loadOngs();
@@ -62,7 +60,16 @@ import './styles.css';
   function handleLogout() {
     
     history.push('/');}
+    
+    function handleOng(ong) {
+      
 
+      localStorage.setItem('ongId', ong._id);
+      localStorage.setItem('ongName', ong.name);
+
+      history.push('/ong')
+     
+    }
     return (
           
       <div className="profile-container">
@@ -77,10 +84,12 @@ import './styles.css';
           <h1>Ongs Cadastradas</h1>
 
             <Map className="map" center={[latitude, longitude]} zoom={13}>
+              
               <TileLayer
                 attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
+
               {ongs.map( ong => (
                  <Marker 
                  key={ong._id} 
@@ -89,13 +98,18 @@ import './styles.css';
                    lng: ong.location.coordinates[0]
                   }} 
                   icon={myIcon}>
-                 <Popup>
-                  <img src={logoImg} style={{width: 50}} alt="Be The Hero"/>
-                  <strong>{ong.name}</strong>
-                  <FiArrowRight size={18} color="#e02041"/>
-                 </Popup>
+                 
+                  <Popup>
+                    <button className="border-button" onClick={() => handleOng(ong)} type="button">
+                      <img src={logoImg} style={{width: 50}} alt="Be The Hero"/>
+                      <strong>{ong.name}</strong>
+                      <FiArrowRight size={18} color="#e02041"/>
+                    </button>
+                  </Popup>
+                
                </Marker>
               ))}
+
             </Map>
           </div>
         </div>

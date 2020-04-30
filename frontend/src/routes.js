@@ -7,6 +7,7 @@ import NewIncident from './pages/NewIncident';
 import Incidents from './pages/Incidents';
 import Detail from './pages/Detail';
 import Maps from './pages/Maps';
+import Ongs from './pages/Ong';
 
 function Routes() {
     return(
@@ -19,6 +20,7 @@ function Routes() {
             <Route path="/incidents" component={Incidents} />
             <Route path="/detail" component={Detail} />
             <Route path="/map" component={Maps} />
+            <Route path="/ong" component={Ongs} />
            
         </Switch>
         </BrowserRouter>

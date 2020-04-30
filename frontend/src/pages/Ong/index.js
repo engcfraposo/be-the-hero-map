@@ -7,23 +7,22 @@ import api from '../../services/Api'
 
 
 function Profile() {
-    
+    const [incidents, setIncidents] = useState([]);
     const history = useHistory()
+    const ongId = localStorage.getItem('ongId')
+    const ongName = localStorage.getItem('ongName')
     
-    const [ incidents , setIncidents ] = useState([]);
-
     useEffect(() => {
-        async function loadIncidents(){
-          const response = await api.get('incidents');
-    
-          setIncidents(response.data);
-        }
-    
-        loadIncidents();
-      }, [])
-    
-    
-      async function handleDetail(incident){
+        api.get('profile', {
+            headers:{
+                Authorization: ongId,
+            }
+        }).then(response => {
+            setIncidents(response.data)
+        })
+    }, [ongId])
+
+    async function handleDetail(incident){
         try {
             
             localStorage.setItem('incidentId', incident._id);
@@ -43,10 +42,10 @@ function Profile() {
           }
 
       }
-
-        function handleLogout() {
-            localStorage.clear();
-            history.push('/');}
+    
+      function handleLogout() {
+        localStorage.clear();
+        history.push('/');}
    
         
    
@@ -54,12 +53,10 @@ function Profile() {
     <div className="profile-container">
         <div className="content">
             <header>
-                <div>
-                    <img src={logoImg} alt="Be The Hero"/>
-                </div>
+            <img src={logoImg} alt="Be The Hero"/>
             <button onClick={() => handleLogout()} type="button"><FiPower size={18} color="#e02041"/></button>
             </header>
-            <h1>Casos Cadastrados</h1>
+            <h1>Casos Cadastrados - {ongName}</h1>
             <ul>
                 
                 {incidents.map( incident => (
@@ -77,7 +74,6 @@ function Profile() {
                     </div>
                 </li>
                 ))}
-
             </ul>
             
             
