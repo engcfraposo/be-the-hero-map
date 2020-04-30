@@ -99,3 +99,16 @@
     justify-content: space-between;
     display: flex;
 }
+
+.contact-container {
+    position: absolute;
+    background: transparent;
+    right: 24px;
+    top: 24px;
+    border: 0;
+    transition: opacity 0.2s;
+}
+
+.contact-container a {
+    padding-left: 15px;
+}

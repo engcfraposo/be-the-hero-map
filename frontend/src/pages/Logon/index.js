@@ -64,7 +64,7 @@ export default function Logon() {
         <img src={heroesImg} alt="Heroes"/>
           <div className="button-container">
               <Link to="incidents" className="button"  style={{width: 290}} >Lista de casos</Link>
-              <Link className="button" style={{width: 290}} > Mapa de Ong's</Link>
+              <Link to="map" className="button" style={{width: 290}} > Mapa de Ong's</Link>
           </div>
         </div>
     </div>
