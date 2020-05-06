@@ -49,6 +49,13 @@ export default function Logon() {
   
     }
 
+    async function handleMaps() {
+      
+          
+      navigation.navigate('Maps')
+
+  }
+
 
     return (
       <Container
@@ -88,7 +95,7 @@ export default function Logon() {
         </Action>
 
         <Action>
-          <ActionText>Mapa de Ong's</ActionText>
+          <ActionText onPress={handleMaps}>Mapa de Ong's</ActionText>
         </Action>
 
       </Container>

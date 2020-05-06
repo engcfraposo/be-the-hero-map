@@ -3,9 +3,9 @@ import {Image} from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location';
 
-import api from '.././services/Api'
+import api from '../../services/Api'
 
-import './styles'
+import styles from './styles'
 
 import logoImg from '../../assets/logo.png'
 
@@ -50,19 +50,16 @@ export default function Maps() {
   useEffect(() => {
 
     async function loadOngs(){
+      
+      const response = await api.get('ongs')
+
       const { latitude, longitude } = currentRegion;
-      const response = await api.get('ongs',
-      {
-        params: {
-          latitude,
-          longitude,}
-      });
-
+     
       setOngs(response.data);
-
+      
       
     }
-
+    
     loadOngs();
   }, [])
 
